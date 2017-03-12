@@ -131,7 +131,7 @@ class Symlink extends DeploystrategyAbstract
         if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
             $sourcePath = str_replace('/', '\\', $absSourcePath);
         }
-        return symlink($sourcePath, $destPath);
+        return symlink($absSourcePath, $destPath);
     }
 
     /**
