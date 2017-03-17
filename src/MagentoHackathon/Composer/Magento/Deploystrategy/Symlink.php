@@ -131,7 +131,12 @@ class Symlink extends DeploystrategyAbstract
         if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
             $sourcePath = str_replace('/', '\\', $absSourcePath);
         }
-        return symlink($absSourcePath, $destPath);
+        // we have to fix the release path to be current and not the path like
+        // /var/www/site/releases/20170317110306/vendor/zxv
+        // as the capistrano releases gets deleted after a while
+        // realistically this path wont change
+        $hotFixAbsSourcePath = preg_replace('/releases\/(\d+)\//', 'current/', $absSourcePath);
+        return symlink($hotFixAbsSourcePath, $destPath);
     }
 
     /**
