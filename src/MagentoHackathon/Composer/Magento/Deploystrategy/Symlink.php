@@ -136,7 +136,7 @@ class Symlink extends DeploystrategyAbstract
         // as the capistrano releases gets deleted after a while
         // realistically this path wont change
         $hotFixAbsSourcePath = preg_replace('/releases\/(\d+)\//', 'current/', $absSourcePath);
-        return symlink($hotFixAbsSourcePath, $destPath);
+        return @symlink($hotFixAbsSourcePath, $destPath);
     }
 
     /**
